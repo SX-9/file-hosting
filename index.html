@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>SX's File Hosting</title>
+		<style>
+			body {
+				background: black;
+				color: white;
+				font-family: sans-serif;
+				text-align: center;
+			}
+			input {
+				all: unset;
+				width: 20rem;
+				height: 3em;
+				background: darkgrey;
+				color: black;
+				margin: .3em;
+				border-radius: 5%;
+				border: 3px white solid;
+			}
+			h1, p, a {
+				color: white;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Welcome</h1>
+		<p>File Hosting</p>
+		<br>
+		<form ref='uploadForm' 
+			id='uploadForm' 
+			action='/upload' 
+			method='post' 
+			encType="multipart/form-data">
+				<input type="file" name="file"/>
+				<br>
+				<input type="text" name="pass" placeholder="Password">
+				<br>
+				<input type='submit' value='Upload'/>
+		</form>
+		<p>This Is Only For <a href="https://sx9.is-a.dev">Me</a></p>
+	</body>
+</html>
