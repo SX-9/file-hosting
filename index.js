@@ -28,7 +28,7 @@ app.post('/upload', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('File Uploaded To https://' + req.hostname + ':' + port + '/files/' + file.name);
+    res.send('File Uploaded To ' + req.hostname + ':' + port + '/files/' + file.name);
   });
 });
 
