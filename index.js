@@ -2,6 +2,7 @@
 
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const fs = require('fs');
 const app = express();
 const { pass, port } = require('./config.json');
 
@@ -22,13 +23,13 @@ app.post('/upload', (req, res) => {
     return;
   }
   file = req.files.file;
-  console.log("File Uploaded: " + file.name);
-  uploadPath = __dirname + '/files/' + file.name;
+  console.log("File Uploaded: " + fs.readdirSync('./files').length + '_' + file.name);
+  uploadPath = __dirname + '/files/' + fs.readdirSync('./files').length + '_' + file.name;
   file.mv(uploadPath, (err) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('File Uploaded To ' + req.hostname + ':' + port + '/files/' + file.name);
+    res.send('File Uploaded To ' + req.hostname + ':' + port + '/files/' + ( fs.readdirSync('./files').length - 1 ) + '_' + file.name);
   });
 });
 
