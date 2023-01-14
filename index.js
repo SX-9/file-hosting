@@ -1,3 +1,4 @@
+#! /bin/node
 "use strict";
 
 const express = require('express');
@@ -6,13 +7,21 @@ const fs = require('fs');
 const app = express();
 const { show_port, pass, port } = require('./config.json');
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+if (!fs.existsSync('./files')){
+  fs.mkdirSync('./files');
+}
 
-app.use('/files', express.static(__dirname + '/files'));
 app.use(express.json());
 app.use(fileUpload());
+app.use('/files', express.static(__dirname + '/files'));
+
+app.get('/styles.css', (req, res) => res.sendFile(__dirname + '/style.css'));
+app.get('/browse', (req, res) => res.sendFile(__dirname + '/browse.html'));
+app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
+app.get('/files', (req, res) => {
+	if (req.query.p !== pass) return res.json(['Access Denied']);
+	res.json(fs.readdirSync('./files'));
+});
 
 app.post('/upload', (req, res) => {
   if (req.body.pass !== pass) return res.status(401).send('Incorrect Password');
