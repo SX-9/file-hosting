@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/SX-9/file-hosting#readme",
   "dependencies": {
-    "archive": "^0.0.2",
     "express": "^4.18.2",
-    "express-fileupload": "^1.4.0",
-    "express-ip-access-control": "^1.1.0"
+    "express-fileupload": "^1.4.0"
   }
 }
