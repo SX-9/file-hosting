@@ -5,7 +5,9 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const app = express();
-const { show_port, pass, port } = require('./config.json');
+const { show_port, pass, port } = fs.existsSync('./config.json') ? JSON.stringify(fs.readFileSync('./config.json', 'UTF-8')) : process.env;
+
+console.log('Starting With Configs:', show_port, pass, port)
 
 if (!fs.existsSync('./files')){
   fs.mkdirSync('./files');
