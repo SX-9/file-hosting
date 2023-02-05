@@ -17,6 +17,7 @@
 	<script>
 		async function update() {
 			let files = await fetch('/files?p=' + new URLSearchParams(window.location.search).get('p')).then(r => r.json());
+			files.sort((a, b) => a.localeCompare(b));
 			document.getElementById('count').innerText = files.length || 0;
 			document.getElementById('files').innerText = '';
 			files.forEach(file => {

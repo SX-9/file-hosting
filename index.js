@@ -5,9 +5,9 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const app = express();
-const { show_port, pass, port } = fs.existsSync('./config.json') ? JSON.stringify(fs.readFileSync('./config.json', 'UTF-8')) : process.env;
+const { show_port, pass, PORT } = fs.existsSync('./config.json') ? JSON.stringify(fs.readFileSync('./config.json', 'UTF-8')) : process.env;
 
-console.log('Starting With Configs:', show_port, pass, port)
+console.log('Starting With Configs:', show_port, pass, PORT)
 
 if (!fs.existsSync('./files')){
   fs.mkdirSync('./files');
@@ -40,8 +40,8 @@ app.post('/upload', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('File Uploaded To ' + req.hostname + ( show_port ? ':' + port : '' ) + '/files/' + ( fs.readdirSync('./files').length - 1 ) + '_' + file.name);
+    res.send('File Uploaded To ' + req.hostname + ( show_port ? ':' + PORT : '' ) + '/files/' + ( fs.readdirSync('./files').length - 1 ) + '_' + file.name);
   });
 });
 
-app.listen(port, () => console.log('Online At ' + port));
+app.listen(PORT, () => console.log('Online At ' + PORT));
